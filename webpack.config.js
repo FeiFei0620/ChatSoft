@@ -2,9 +2,10 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     mode: "development",
-    // devtool: 'eval-source-map',          //浏览器调试代码
+    devtool: 'source-map',          //浏览器调试代码
 
     entry: __dirname + "/app/main.js",        //打包
     output: {
@@ -31,19 +32,33 @@ module.exports = {
                 exclude: /node_modules/                      //屏蔽不需要处理的文件
             },
             {
-                test: /(\.css|\.less)$/,
+                test: /\.css$/,
                 use: [
                     {
                         loader: "style-loader"
                     },{
-                        loader: "css-loader",
-                        options: {
-                            module: true,   // 指定启用css modules
-                            localIdentName: '[name]__[local]--[hash:base64:5]' // 指定css的类名格式
-                        }
+                        loader: "css-loader"
                     },{
                         loader: "postcss-loader"
                     }
+                ]
+            },
+            {
+                test: /(\.less|\.sass|\.scss)$/,
+                use: [
+                    {
+                        loader: "style-loader"
+                    },{
+                        loader: "postcss-loader"
+                    },{
+                        loader: "less-loader"
+                    }
+                ]
+            },
+            {
+                test: /\.(png|jpg)$/,
+                use: [
+                    {loader: 'url-loader'}
                 ]
             }
         ]
