@@ -13,22 +13,33 @@ class Greeter extends Component {
   }
 
   //change username
-  onChangeUserName = (e) => {
+  onChangeUserName = e => {
     this.setState({
       userName: e.target.value
     });
   };
 
-  onChangeUserPwd = (e) => {
+  onChangeUserPwd = e => {
     this.setState({
-        userPwd: e.target.value
+      userPwd: e.target.value
     });
   };
 
   //checkbox change
-  onChange = (e) => {
+  onChange = e => {
     console.log(`checked = ${e.target.checked}`);
-  }
+  };
+
+  loginClick = () => {
+    let htmlobj = $.ajax({
+      type: "GET",
+      url: "route.json",
+      async: false,
+      dataType: "jsonp",
+      // dataType: "jsonp",
+    });
+    console.log(htmlobj);
+  };
 
   render() {
     let { userName, userPwd } = this.state;
@@ -36,7 +47,7 @@ class Greeter extends Component {
       <Icon type="close-circle" onClick={this.emitEmpty} />
     ) : null;
     const suffixOfPwd = userPwd ? (
-        <Icon type="close-circle" onClick={this.emitEmpty} />
+      <Icon type="close-circle" onClick={this.emitEmpty} />
     ) : null;
     return (
       <div className="login-page">
@@ -60,14 +71,16 @@ class Greeter extends Component {
               ref={node => (this.userNameInput = node)}
             />
             <div className="save-pwd">
-                <Checkbox onChange={this.onChange}>下次自动登录</Checkbox>
+              <Checkbox onChange={this.onChange}>下次自动登录</Checkbox>
             </div>
             <div className="btns">
-              <Link to="/mainPage">
-                <Button type="primary" className="login-btn">
-                  {"登录"}
-                </Button>
-              </Link>
+              <Link to="/mainPage"><Button
+                type="primary"
+                className="login-btn"
+              >
+                {"登录"}
+              </Button></Link>
+
               {/*<Link to="/appleBasket">
                 <Button type="danger">appleBasket</Button>
                </Link>*/}

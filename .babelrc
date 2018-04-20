@@ -1,6 +1,14 @@
 {
   "plugins": [
-    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }] // `style: true` 会加载 less 文件
+    [
+      "import",
+      { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }],
+      [
+        "transform-runtime", {
+          "polufill": false,
+          "regenerator": true
+        }
+      ]
   ],
   "presets": ["react", "env", "es2015", "stage-2"],
   "env": {

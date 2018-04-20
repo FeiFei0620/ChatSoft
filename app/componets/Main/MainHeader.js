@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Icon} from 'antd';
 import { Link } from "react-router-dom";
 import { browserHistory } from "react-router";
+import { createBrowserHistory } from 'history'
 
 export default class MainHeader extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ export default class MainHeader extends Component {
   }
 
   logout = () =>{
-    browserHistory.push('/appleBasket')
+    let history = createBrowserHistory();
+    history.push('/appleBasket')
   }
 
   render() {
